@@ -1,0 +1,6 @@
+# json-buffer
+
+
+## License
+
+MIT
