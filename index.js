@@ -1,7 +1,10 @@
 var Buffer = require('buffer').Buffer
 
-exports.stringify = function stringify (o, a) {
+//TODO: handle reviver/dehydrate function like normal
+//and handle indentation, like normal.
+//if anyone needs this... please send pull request.
 
+exports.stringify = function stringify (o) {
   if(o && Buffer.isBuffer(o))
     o = o.toString('base64')
 
@@ -19,7 +22,6 @@ exports.stringify = function stringify (o, a) {
         if(!first)
           s += ', '
         first = false
-
         s += array ? stringify(o[k]) : stringify(k) + ': ' + stringify(o[k])
       }
     }
@@ -32,7 +34,6 @@ exports.stringify = function stringify (o, a) {
 }
 
 exports.parse = function (s) {
-
   return JSON.parse(s, function (key, value) {
     if('string' === typeof value && /==$/.test(value))
       return new Buffer(value, 'base64')
