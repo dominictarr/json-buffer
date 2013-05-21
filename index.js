@@ -18,7 +18,7 @@ exports.stringify = function stringify (o) {
     var first = true
 
     for(var k in o) {
-      if(Object.hasOwnProperty.call(o, k)) {
+      if(Object.hasOwnProperty.call(o, k) && o[k] !== void(0)) {
         if(!first)
           s += ','
         first = false
