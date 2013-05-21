@@ -17,6 +17,16 @@ var examples = {
     array: [],
     boolean: true,
     boolean2: false
+  },
+  foo: new Buffer('foo'),
+  foo2: new Buffer('foo2'),
+  escape: {
+    buffer: new Buffer('x'),
+    string: _JSON.stringify(new Buffer('x'))
+  },
+  escape2: {
+    buffer: new Buffer('x'),
+    string: ':base64:'+ new Buffer('x').toString('base64')
   }
 }
 
@@ -24,9 +34,9 @@ for(k in examples)
 (function (value, k) { 
   test(k, function (t) {
     var s = _JSON.stringify(value)
+    console.log(s)
     var _value = _JSON.parse(s)
     t.deepEqual(toJSON(_value), toJSON(value))
-    console.log(k, value)
     t.end()
   })
 })(examples[k], k)
