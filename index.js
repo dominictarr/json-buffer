@@ -1,42 +1,25 @@
 var Buffer = require('buffer').Buffer
+var traverse = require('traverse')
 
 //TODO: handle reviver/dehydrate function like normal
 //and handle indentation, like normal.
 //if anyone needs this... please send pull request.
 
 exports.stringify = function stringify (o) {
-  if(o && Buffer.isBuffer(o))
-    o = o.toString('base64')
-
-  if(o && o.toJSON)
-    o = o.toJSON()
-
-  if(o && 'object' === typeof o) {
-    var s = ''
-    var array = Array.isArray(o)
-    s = array ? '[' : '{'
-    var first = true
-
-    for(var k in o) {
-      if(Object.hasOwnProperty.call(o, k)) {
-        if(!first)
-          s += ', '
-        first = false
-        s += array ? stringify(o[k]) : stringify(k) + ': ' + stringify(o[k])
-      }
-    }
-
-    s += array ? ']' : '}'
-
-    return s
-  } else
-    return JSON.stringify(o)
+  if (Buffer.isBuffer(o)) {
+    o = 'base64:' + o.toString('base64')
+  } else if ('object' == typeof o) {
+    o = traverse(o).map(function (x) {
+      if (Buffer.isBuffer(x)) this.update('base64:' + x.toString('base64'))
+    })
+  }
+  return JSON.stringify(o)
 }
 
 exports.parse = function (s) {
   return JSON.parse(s, function (key, value) {
-    if('string' === typeof value && /==$/.test(value))
-      return new Buffer(value, 'base64')
-    return value
+    return ('string' == typeof value && /^base64:/.test(value))
+      ? new Buffer(value.split('base64:')[1], 'base64')
+      : value
   })
 }
