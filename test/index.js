@@ -27,6 +27,9 @@ var examples = {
   escape2: {
     buffer: new Buffer('x'),
     string: ':base64:'+ new Buffer('x').toString('base64')
+  },
+  undefined: {
+    empty: undefined
   }
 }
 
