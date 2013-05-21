@@ -6,10 +6,10 @@ var Buffer = require('buffer').Buffer
 
 exports.stringify = function stringify (o) {
   if(o && Buffer.isBuffer(o))
-    o = o.toString('base64')
+    return JSON.stringify(':base64:' + o.toString('base64'))
 
   if(o && o.toJSON)
-    o = o.toJSON()
+    o =  o.toJSON()
 
   if(o && 'object' === typeof o) {
     var s = ''
@@ -29,14 +29,20 @@ exports.stringify = function stringify (o) {
     s += array ? ']' : '}'
 
     return s
-  } else
+  } else if ('string' === typeof o) {
+    return JSON.stringify(/^:/.test(o) ? ':' + o : o)
+  } else 
     return JSON.stringify(o)
 }
 
 exports.parse = function (s) {
   return JSON.parse(s, function (key, value) {
-    if('string' === typeof value && /==$/.test(value))
-      return new Buffer(value, 'base64')
+    if('string' === typeof value) {
+      if(/^:base64:/.test(value))
+        return new Buffer(value.substring(8), 'base64')
+      else
+        return /^:/.test(value) ? value.substring(1) : value 
+    }
     return value
   })
 }
