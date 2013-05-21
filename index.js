@@ -20,9 +20,9 @@ exports.stringify = function stringify (o) {
     for(var k in o) {
       if(Object.hasOwnProperty.call(o, k)) {
         if(!first)
-          s += ', '
+          s += ','
         first = false
-        s += array ? stringify(o[k]) : stringify(k) + ': ' + stringify(o[k])
+        s += array ? stringify(o[k]) : stringify(k) + ':' + stringify(o[k])
       }
     }
 
