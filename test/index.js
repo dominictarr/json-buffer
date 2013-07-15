@@ -30,6 +30,9 @@ var examples = {
   },
   undefined: {
     empty: undefined
+  },
+  fn: {
+    fn: function () {}    
   }
 }
 
