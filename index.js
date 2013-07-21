@@ -6,7 +6,7 @@ var bops = require('bops')
 
 exports.stringify = function stringify (o) {
   if(o && bops.is(o))
-    return JSON.stringify(':base64:' + o.toString('base64'))
+    return JSON.stringify(':base64:' + bops.to(o, 'base64'))
 
   if(o && o.toJSON)
     o =  o.toJSON()
