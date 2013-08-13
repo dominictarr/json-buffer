@@ -2,6 +2,10 @@
 
 JSON functions that can convert buffers!
 
+[![build status](https://secure.travis-ci.org/dominictarr/json-buffer.png)](http://travis-ci.org/dominictarr/json-buffer)
+
+[![testling badge](https://ci.testling.com/dominictarr/json-buffer.png)](https://ci.testling.com/dominictarr/json-buffer)
+
 JSON mangles buffers by converting to an array...
 which isn't helpful. json-buffers converts to base64 instead,
 and deconverts base64 to a buffer.
