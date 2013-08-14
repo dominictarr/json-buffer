@@ -3,7 +3,7 @@ var test = require('tape')
 var _JSON = require('../')
 var bops = require('bops')
 
-function toJSON (o) {
+function clone (o) {
   return JSON.parse(JSON.stringify(o))
 }
 
@@ -43,7 +43,7 @@ for(k in examples)
     var s = _JSON.stringify(value)
     console.log(s)
     var _value = _JSON.parse(s)
-    t.deepEqual(toJSON(_value), toJSON(value))
+    t.deepEqual(clone(_value), clone(value))
     t.end()
   })
 })(examples[k], k)
