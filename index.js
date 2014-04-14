@@ -19,11 +19,15 @@ exports.stringify = function stringify (o) {
 
     for(var k in o) {
       var isFunction = 'function' == typeof o[k]
-      if(Object.hasOwnProperty.call(o, k) && o[k] !== void(0) && !isFunction) {
+      if(Object.hasOwnProperty.call(o, k) && !isFunction) {
         if(!first)
           s += ','
         first = false
-        s += array ? stringify(o[k]) : stringify(k) + ':' + stringify(o[k])
+        if (array) {
+          s += stringify(o[k])
+        } else if (o[k] !== void(0)) {
+          s += stringify(k) + ':' + stringify(o[k])
+        }
       }
     }
 
@@ -32,6 +36,8 @@ exports.stringify = function stringify (o) {
     return s
   } else if ('string' === typeof o) {
     return JSON.stringify(/^:/.test(o) ? ':' + o : o)
+  } else if ('undefined' === typeof o) {
+    return 'null';
   } else 
     return JSON.stringify(o)
 }
