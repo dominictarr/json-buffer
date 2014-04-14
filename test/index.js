@@ -32,6 +32,9 @@ var examples = {
   undefined: {
     empty: undefined
   },
+  undefinedArray: {
+    array: [undefined, 1, 'two']
+  },
   fn: {
     fn: function () {}    
   }
