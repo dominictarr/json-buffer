@@ -30,7 +30,10 @@ var examples = {
     string: ':base64:'+ bops.to(bops.from('x'), 'base64')
   },
   undefined: {
-    empty: undefined
+    empty: undefined, test: true
+  },
+  undefined2: {
+    first: 1, empty: undefined, test: true
   },
   undefinedArray: {
     array: [undefined, 1, 'two']
