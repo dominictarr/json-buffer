@@ -18,8 +18,8 @@ exports.stringify = function stringify (o) {
     var first = true
 
     for(var k in o) {
-      var isFunction = 'function' == typeof o[k]
-      if(Object.hasOwnProperty.call(o, k) && !isFunction) {
+      var ignore = 'function' == typeof o[k] || (!array && 'undefined' === typeof o[k])
+      if(Object.hasOwnProperty.call(o, k) && !ignore) {
         if(!first)
           s += ','
         first = false
