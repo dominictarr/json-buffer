@@ -7,9 +7,6 @@
     "type": "git",
     "url": "git://github.com/dominictarr/json-buffer.git"
   },
-  "dependencies": {
-    "bops": "0.0.6"
-  },
   "devDependencies": {
     "tape": "~1.0.2"
   },

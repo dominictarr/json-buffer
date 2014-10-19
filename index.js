@@ -1,12 +1,10 @@
-var bops = require('bops')
-
 //TODO: handle reviver/dehydrate function like normal
 //and handle indentation, like normal.
 //if anyone needs this... please send pull request.
 
 exports.stringify = function stringify (o) {
-  if(o && bops.is(o))
-    return JSON.stringify(':base64:' + bops.to(o, 'base64'))
+  if(o && Buffer.isBuffer(o))
+    return JSON.stringify(':base64:' + o.toString('base64'))
 
   if(o && o.toJSON)
     o =  o.toJSON()
@@ -38,7 +36,7 @@ exports.stringify = function stringify (o) {
     return JSON.stringify(/^:/.test(o) ? ':' + o : o)
   } else if ('undefined' === typeof o) {
     return 'null';
-  } else 
+  } else
     return JSON.stringify(o)
 }
 
@@ -46,7 +44,7 @@ exports.parse = function (s) {
   return JSON.parse(s, function (key, value) {
     if('string' === typeof value) {
       if(/^:base64:/.test(value))
-        return bops.from(value.substring(8), 'base64')
+        return new Buffer(value.substring(8), 'base64')
       else
         return /^:/.test(value) ? value.substring(1) : value 
     }
