@@ -1,15 +1,14 @@
 
 var test = require('tape')
 var _JSON = require('../')
-var bops = require('bops')
 
 function clone (o) {
   return JSON.parse(JSON.stringify(o))
 }
 
 var examples = {
-  simple: { foo: [], bar: {}, baz: bops.from('some binary data') },
-  just_buffer: bops.from('JUST A BUFFER'),
+  simple: { foo: [], bar: {}, baz: new Buffer('some binary data') },
+  just_buffer: new Buffer('JUST A BUFFER'),
   all_types: {
     string:'hello',
     number: 3145,
@@ -22,12 +21,12 @@ var examples = {
   foo: new Buffer('foo'),
   foo2: new Buffer('foo2'),
   escape: {
-    buffer: bops.from('x'),
-    string: _JSON.stringify(bops.from('x'))
+    buffer: new Buffer('x'),
+    string: _JSON.stringify(new Buffer('x'))
   },
   escape2: {
     buffer: new Buffer('x'),
-    string: ':base64:'+ bops.to(bops.from('x'), 'base64')
+    string: ':base64:'+ new Buffer('x').toString('base64')
   },
   undefined: {
     empty: undefined, test: true
