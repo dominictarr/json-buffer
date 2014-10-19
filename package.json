@@ -1,7 +1,7 @@
 {
   "name": "json-buffer",
   "description": "JSON parse & stringify that supports binary via bops & base64",
-  "version": "2.0.9",
+  "version": "2.0.10",
   "homepage": "https://github.com/dominictarr/json-buffer",
   "repository": {
     "type": "git",
