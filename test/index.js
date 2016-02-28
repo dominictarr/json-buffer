@@ -38,17 +38,23 @@ var examples = {
     array: [undefined, 1, 'two']
   },
   fn: {
-    fn: function () {}    
+    fn: function () {}
   }
 }
 
 for(k in examples)
-(function (value, k) { 
+(function (value, k) {
   test(k, function (t) {
     var s = _JSON.stringify(value)
     console.log(s)
     var _value = _JSON.parse(s)
     t.deepEqual(clone(_value), clone(value))
+
+    s = _JSON.stringify(value, undefined, 4)
+    console.log(s)
+    _value = _JSON.parse(s)
+    t.deepEqual(clone(_value), clone(value))
+
     t.end()
   })
 })(examples[k], k)
