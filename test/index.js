@@ -7,6 +7,7 @@ function clone (o) {
 }
 
 var examples = {
+  justUndefined: undefined,
   simple: { foo: [], bar: {}, baz: new Buffer('some binary data') },
   just_buffer: new Buffer('JUST A BUFFER'),
   all_types: {
