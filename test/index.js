@@ -39,17 +39,25 @@ var examples = {
   },
   fn: {
     fn: function () {}    
-  }
+  },
+  undefined: undefined
 }
 
 for(k in examples)
 (function (value, k) { 
   test(k, function (t) {
     var s = _JSON.stringify(value)
-    console.log(s)
-    var _value = _JSON.parse(s)
-    t.deepEqual(clone(_value), clone(value))
+    console.log('parse', s)
+    if(JSON.stringify(value) !== undefined) {
+      console.log(s)
+      var _value = _JSON.parse(s)
+      t.deepEqual(clone(_value), clone(value))
+    }
+    else
+      t.equal(s, undefined)
     t.end()
   })
 })(examples[k], k)
+
+
 
