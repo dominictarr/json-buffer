@@ -3,6 +3,8 @@
 //if anyone needs this... please send pull request.
 
 exports.stringify = function stringify (o) {
+  if('undefined' == typeof o) return o
+
   if(o && Buffer.isBuffer(o))
     return JSON.stringify(':base64:' + o.toString('base64'))
 
@@ -22,7 +24,10 @@ exports.stringify = function stringify (o) {
           s += ','
         first = false
         if (array) {
-          s += stringify(o[k])
+          if(o[k] == undefined)
+            s += 'null'
+          else
+            s += stringify(o[k])
         } else if (o[k] !== void(0)) {
           s += stringify(k) + ':' + stringify(o[k])
         }
