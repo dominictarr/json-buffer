@@ -13,6 +13,9 @@
   "scripts": {
     "test": "set -e; for t in test/*.js; do node $t; done"
   },
+  "files": [
+    "index.js"
+  ],
   "author": "Dominic Tarr <dominic.tarr@gmail.com> (http://dominictarr.com)",
   "license": "MIT",
   "testling": {
